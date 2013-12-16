@@ -10,5 +10,5 @@
 
 void show_message(char type, char* message);
 
-void err_quit(const char* message, ...);
-void err_sys(const char* message, ...);
+void err_quit(const char *fmt, ...);
+void err_sys(const char *fmt, ...);

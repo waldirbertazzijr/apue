@@ -8,15 +8,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <errno.h>
-#define MAXLINE 1000
+#include <string.h>
+#define MAXLINE 4096
 
 
 static void err_doit(int, int, const char *, va_list);
-
-void show_message(char type, char* message){
-    printf("[%c] %s", type, message);
-}
 
 // Function that shows an error message and quits the program.
 void err_quit(const char *fmt, ...) {
