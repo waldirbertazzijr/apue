@@ -17,6 +17,9 @@
 #define true 1
 #define false 0
 
+// HEADER
+char* get_filetype(int file);
+
 // Commands implementations
 bool ls(const char * args[]){
     DIR                 *dp;
@@ -25,14 +28,27 @@ bool ls(const char * args[]){
     dp = opendir(args[2]);
     
     if (dp == NULL) {
-        err_sys("Can't open '%s'.",  args[2]);
+        err_sys("Can't open '%s'",  args[2]);
     }
     
     while ((dirp = readdir(dp)) != NULL) {
-        printf("%s\n", dirp->d_name);
+        printf("%s - %s\n", get_filetype(dirp->d_type), dirp->d_name);
     }
     
     closedir(dp);
     
     return true;
+}
+
+char* get_filetype(int file){
+    switch (file) {
+        case DT_DIR:
+            return "DIR";
+            break;
+        
+        case DT_REG:
+        default:
+            return "FILE";
+            break;
+    }
 }
